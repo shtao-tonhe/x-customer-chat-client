@@ -1,13 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { HiSend, HiPaperclip, HiImage, HiVideo, HiFileText } from 'react-icons/hi2';
+import { BsSendArrowUpFill } from 'react-icons/bs';
+import { BsPaperclip } from 'react-icons/bs';
 import { TbMessageCircle } from 'react-icons/tb';
 
-// 导入消息组件
-import TextMessage from './components/TextMessage';
-import ConfirmMessage from './components/ConfirmMessage';
-import AttachmentMessage from './components/AttachmentMessage';
-import InputMessage from './components/InputMessage';
+import { FaRegImage } from 'react-icons/fa6';
+import { FaRegFileAlt } from 'react-icons/fa';
+import { FaFileVideo } from 'react-icons/fa';
+
+import TextMessage from './Message/TextMessage';
+import FileMessage from './Message/FileMessage';
+import ConfirmMessage from './Message/ConfirmMessage';
+import InputMessage from './Message/InputMessage';
+import AuthCodeMessage from './Message/AuthCodeMessage';
+import SelectMessage from './Message/SelectMessage';
 
 const ChatPage = () => {
   const navigate = useNavigate();
@@ -170,7 +176,7 @@ const ChatPage = () => {
         );
       case 'attachment':
         return (
-          <AttachmentMessage 
+          <AuthCodeMessage 
             key={msg.id} 
             textContent={msg.textContent}
             attachments={msg.attachments}
@@ -200,7 +206,7 @@ const ChatPage = () => {
       {/* 顶部导航 */}
       <header className="bg-blue-600 text-white p-4 shadow-md">
         <div className="flex items-center justify-between">
-          <button 
+          <button
             onClick={() => navigate('/')}
             className="p-2 rounded-full hover:bg-blue-700 transition-colors"
           >
@@ -218,9 +224,8 @@ const ChatPage = () => {
             今天
           </span>
         </div>
-        
+
         {messages.map(msg => renderMessage(msg))}
-        
         <div ref={messagesEndRef} />
       </main>
 
@@ -228,16 +233,16 @@ const ChatPage = () => {
       <footer className="border-t border-gray-200 p-3 bg-white">
         <div className="flex items-center gap-2 mb-2">
           <button className="p-2 text-gray-600 hover:bg-gray-100 rounded-full transition-colors">
-            <HiPaperclip size={20} />
+            <BsPaperclip size={20} />
           </button>
           <button className="p-2 text-gray-600 hover:bg-gray-100 rounded-full transition-colors">
-            <HiImage size={20} />
+            <FaRegImage size={20} />
           </button>
           <button className="p-2 text-gray-600 hover:bg-gray-100 rounded-full transition-colors">
-            <HiVideo size={20} />
+            <FaFileVideo size={20} />
           </button>
           <button className="p-2 text-gray-600 hover:bg-gray-100 rounded-full transition-colors">
-            <HiFileText size={20} />
+            <FaRegFileAlt size={20} />
           </button>
         </div>
         
@@ -254,7 +259,7 @@ const ChatPage = () => {
             onClick={handleSendMessage}
             className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700 transition-colors"
           >
-            <HiSend size={20} />
+            <BsSendArrowUpFill size={20} />
           </button>
         </div>
       </footer>

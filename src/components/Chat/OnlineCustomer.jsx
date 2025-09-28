@@ -18,7 +18,6 @@ const styles = {
   container: {
     padding: '10px',
     borderRadius: '5px',
-    margin: '10px',
   },
   row: {
     display: 'flex',
