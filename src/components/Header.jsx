@@ -1,37 +1,38 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-
+import { MdLanguage } from 'react-icons/md';
+import { TbArrowsDiagonalMinimize2 } from 'react-icons/tb';
 // 聊天路由icon
-import { HiMiniChatBubbleLeftRight } from 'react-icons/hi2';
+// import { HiMiniChatBubbleLeftRight } from 'react-icons/hi2';
 // 帮助路由icon
-import { IoMdHelpCircle } from 'react-icons/io';
+// import { IoMdHelpCircle } from 'react-icons/io';
 // 搜索路由icon
-import { BiSearchAlt } from 'react-icons/bi';
+// import { BiSearchAlt } from 'react-icons/bi';
 
 const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const navLinks = [
-    {
-      path: '/',
-      label: '聊天',
-      icon: <HiMiniChatBubbleLeftRight />,
-      iconSize: '14px'
-    },
-    {
-      path: '/help',
-      label: '帮助',
-      icon: <IoMdHelpCircle />,
-      iconSize: '16px'
-    },
-    {
-      path: '/search',
-      label: '搜索',
-      icon: <BiSearchAlt />,
-      iconSize: '16px'
-    },
-  ];
+  // const navLinks = [
+  //   {
+  //     path: '/',
+  //     label: '聊天',
+  //     icon: <HiMiniChatBubbleLeftRight />,
+  //     iconSize: '14px'
+  //   },
+  //   {
+  //     path: '/help',
+  //     label: '帮助',
+  //     icon: <IoMdHelpCircle />,
+  //     iconSize: '16px'
+  //   },
+  //   {
+  //     path: '/search',
+  //     label: '搜索',
+  //     icon: <BiSearchAlt />,
+  //     iconSize: '16px'
+  //   },
+  // ];
 
   // 判断当前链接是否为激活状态
   const isActive = (path) => {
@@ -46,7 +47,7 @@ const Header = () => {
 
   return (
     <header className="header" style={styles.header}>
-      <div style={styles.container}>
+      {/* <div style={styles.container}>
         <div style={styles.navList}>
           {navLinks.map((item) => (
             <div
@@ -65,6 +66,17 @@ const Header = () => {
             </div>
           ))}
         </div>
+      </div> */}
+      <div className='w-full px-4 flex justify-between items-center'>
+        <div className="ststem-title text-base font-bold">
+          ChatBot
+        </div>
+        <div className='w-full flex justify-end items-center'>
+          {/* 切换语言 */}
+          <MdLanguage className='mr-2 w-5 h-5'/>
+          {/* 全屏展开 */}
+          <TbArrowsDiagonalMinimize2 className='w-5 h-5'/>
+        </div>
       </div>
     </header>
   );
@@ -75,7 +87,7 @@ export default Header;
 const styles = {
   header: {
     minHeight: '3rem',
-    background: 'var(--p-color)',
+    // background: 'var(--p-color)',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',

@@ -5,15 +5,21 @@ import ChatHistory from '../components/Chat/History';
 
 const ChatPage = () => {
   return (
-    <div>
-      <ChatTop></ChatTop>
-      <ChatHistory></ChatHistory>
-      <input
-        type="text"
-        placeholder="输入消息..."
-        style={{ width: '80%', padding: '0.5rem', marginTop: '1rem' }}
-      />
-      <button style={{ marginLeft: '0.5rem' }}>发送</button>
+    <div className='relative h-full w-full'>
+      <div className='absolute top-0 left-0 right-0'>
+        <ChatTop></ChatTop>
+      </div>
+
+      <div className='h-full w-full overflow-y-auto pt-[70px]'>
+        <ChatHistory></ChatHistory>
+      </div>
+
+      <div className='absolute top-0 left-0 right-0'>
+        <input className='absolute bottom-0 left-0 right-0'
+          type="text"
+          placeholder="输入消息..."
+        />
+      </div>
     </div>
   );
 };

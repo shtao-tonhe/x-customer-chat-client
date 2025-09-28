@@ -202,21 +202,7 @@ const ChatPage = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-50">
-      {/* 顶部导航 */}
-      <header className="bg-blue-600 text-white p-4 shadow-md">
-        <div className="flex items-center justify-between">
-          <button
-            onClick={() => navigate('/')}
-            className="p-2 rounded-full hover:bg-blue-700 transition-colors"
-          >
-            <TbMessageCircle size={24} />
-          </button>
-          <h1 className="text-xl font-semibold">在线客服</h1>
-          <div className="w-6"></div> {/* 占位元素，保持标题居中 */}
-        </div>
-      </header>
-
+    <div className="flex flex-col bg-gray-50">
       {/* 聊天内容区域 */}
       <main className="flex-1 overflow-y-auto p-4 space-y-6">
         <div className="flex justify-center py-2">
@@ -245,7 +231,6 @@ const ChatPage = () => {
             <FaRegFileAlt size={20} />
           </button>
         </div>
-        
         <div className="flex items-center gap-2">
           <input
             type="text"

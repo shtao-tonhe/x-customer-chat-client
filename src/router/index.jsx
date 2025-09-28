@@ -10,8 +10,8 @@ const AppRouter = () => {
   return (
     <Layout>
       <Routes>
-        <Route path="/" element={<ChatPage />} />
-        <Route path="/chat" element={<Home />} />
+        <Route path="/" element={<Home />} />
+        <Route path="/chat" element={<ChatPage />} />
         {/* <Route path="/help" element={<HelpPage />} />
         <Route path="/about" element={<AboutPage />} /> */}
         {/* 可扩展更多路由 */}
