@@ -21,7 +21,7 @@ export default defineConfig({
   },
   // 开发服务器配置
   server: {
-    port: 3000, // 端口号
+    port: 3030, // 端口号
     open: true, // 自动打开浏览器
     proxy: {
       '/api': {

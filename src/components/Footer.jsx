@@ -9,20 +9,18 @@ const Footer = () => {
   return (
     <footer className="footer" style={styles.footer}>
       <div style={styles.container}>
-        <div style={styles.row}>
-          <div style={styles.right}>
-            We run on
-            <div style={styles.about}>
-              <img style={styles.logo} src="/public/logo1.svg" alt=""/>
-              X-Chat
-            </div>
+        <div style={styles.right}>
+          <div style={styles.ttext}>We run on</div>
+          <div style={styles.about}>
+            <img style={styles.logo} src="/public/logo1.svg" alt=""/>
+            <span style={styles.company}>X-Chat</span>
           </div>
-          <div
-            onClick={toggleTheme}
-            style={styles.themeToggle}
-          >
-            {theme === 'light' ? '🌙' : '☀️'}
-          </div>
+        </div>
+        <div
+          onClick={toggleTheme}
+          style={styles.themeToggle}
+        >
+          {theme === 'light' ? '🌙' : '☀️'}
         </div>
       </div>
     </footer>
@@ -34,48 +32,42 @@ export default Footer;
 const styles = {
   themeToggle: {
     position: 'absolute',
-    background: 'none',
-    border: 'none',
     cursor: 'pointer',
-    borderRadius: '50%',
+    right: '10px',
+    width: '18px',
+    height: '20px',
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'center',
     color: 'var(--text-color)',
   },
   footer: {
-    padding: '5px 0',
-    marginTop: 'auto',
+    display: 'flex',
+    padding: '10px 0',
+    // background:'pink'
   },
   link: {
     color: 'var(--primary-color)',
     textDecoration: 'none',
-    fontSize: '0.8rem',
+    fontSize: '10px',
   },
   container: {
+    width: '100%',
     maxWidth: '1200px',
-    margin: '2px 10px 2px 10px',
-  },
-  row: {
+    height: '100%',
     display: 'flex',
-    justifyContent: 'flex-end',
     alignItems: 'center',
-    flexWrap: 'wrap',
-    gap: '1rem',
+    justifyContent: 'center',
+    position: 'relative',
   },
   left: {
     flex: 1,
     minWidth: '200px',
   },
-  company: {
-    margin: '0 0 0.8rem 0',
-    fontSize: '0.8rem',
-    color: '#333',
-  },
   copyright: {
     margin: 0,
     color: '#666',
-    fontSize: '0.8rem',
+    fontSize: '10px',
   },
   right: {
     flex:1,
@@ -83,25 +75,31 @@ const styles = {
     textAlign: 'right',
     display: 'flex',
     alignItems: 'center',
-    fontSize: '0.8rem',
-    // justifyContent: 'flex-end',
+    fontSize: '11px',
     justifyContent: 'center',
     color: '#999',
   },
   about: {
     display: 'flex',
-    alignItems: 'center',
+    alignItems: 'flex-end',
     justifyContent: 'center',
-    fontSize: '0.8rem',
     // color: '#000',
     color: '#aa4cfe',
     cursor: 'pointer',
     fontWeight: 'bold',
-    margin: '0 0 0 0.4rem',
   },
   logo: {
-    width: '18px',
-    height: '18px',
+    width: '17px',
+    height: '17px',
+    margin: '0 0 2px 3px',
+  },
+  ttext: {
+    fontSize: '11px',
+    // lineHeight: '15px',
+  },
+  company: {
+    fontSize: '11px',
+    // lineHeight: '14px',
   },
   linkList: {
     listStyle: 'none',

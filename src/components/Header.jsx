@@ -86,8 +86,14 @@ export default Header;
 
 const styles = {
   header: {
-    minHeight: '3rem',
+    position: 'sticky',
+    top: '0',
+    left: '0',
+    height: '40px',
+    marginBottom: '10px',
     // background: 'var(--p-color)',
+    background: '#F8F9FA',
+    boxShadow:'0 0 3px 1px rgba(0, 0, 0, 0.1)',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
