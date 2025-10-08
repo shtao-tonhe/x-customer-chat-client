@@ -16,8 +16,11 @@ const OnlineCustomer = () => {
 
 const styles = {
   container: {
-    padding: '10px',
-    borderRadius: '5px',
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   row: {
     display: 'flex',
@@ -32,8 +35,8 @@ const styles = {
     justifyContent: 'center',
   },
   photo: {
-    width: '50px',
-    height: '50px',
+    width: '35px',
+    height: '35px',
     borderRadius: '50%',
     marginRight: '10px',
     background: 'linear-gradient(to bottom, #c493f3ff, #aa4cfe)',
@@ -43,8 +46,8 @@ const styles = {
     border: '1px solid white',
   },
   logo:{
-    width: '40px',
-    height: '40px',
+    width: '35px',
+    height: '35px',
   },
 }
 

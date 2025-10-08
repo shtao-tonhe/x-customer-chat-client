@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { FiSearch } from 'react-icons/fi';
 import { FaMoneyCheck } from 'react-icons/fa6';
@@ -8,6 +9,7 @@ import { BiSolidBadgeDollar } from 'react-icons/bi';
 
 const Home = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   // 示例数据，实际项目中可以从接口获取
   const cardData = [
@@ -18,7 +20,7 @@ const Home = () => {
   ];
 
   const handleSearchClick = () => {
-    //
+    navigate('/chat');
   };
 
   return (
@@ -135,8 +137,9 @@ const Home = () => {
       </div>
 
       <div className='flex flex-col mx-4 mt-4'>
-        {/* "获取支持"按钮 */}
-        <button className="bg-black text-white text-sm px-4 py-2 rounded-lg font-semibold">
+        <button className="bg-black text-white text-sm px-4 py-2 rounded-lg font-semibold" onClick={() => {
+          navigate('/chat');
+        }}>
           获取支持
         </button>
       </div>

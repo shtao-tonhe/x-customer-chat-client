@@ -18,14 +18,14 @@ const ConfirmMessage = ({
           px-4 py-2 rounded-2xl mb-2
           ${isMe ? 'bg-blue-600 text-white rounded-tr-none' : 'bg-white text-gray-800 rounded-tl-none shadow-sm border border-gray-100'}
         `}>
-          <p>{textContent}</p>
+          <p className='text-sm text-left'>{textContent}</p>
         </div>
         
         {/* 按钮部分 */}
-        <div className={`
+        {/* <div className={`
           px-4 py-3 rounded-2xl 
           ${isMe ? 'bg-blue-600 text-white rounded-tr-none' : 'bg-white text-gray-800 rounded-tl-none shadow-sm border border-gray-100'}
-        `}>
+        `}> */}
           <div className="flex gap-2 justify-end">
             <button
               onClick={() => onConfirm(false)}
@@ -48,11 +48,10 @@ const ConfirmMessage = ({
               {confirmText}
             </button>
           </div>
-        </div>
-        
-        <span className={`text-xs mt-1 ${isMe ? 'text-right text-gray-500' : 'text-left text-gray-500'}`}>
+        {/* </div> */}
+        {/* <span className={`text-xs mt-1 ${isMe ? 'text-right text-gray-500' : 'text-left text-gray-500'}`}>
           {timestamp}
-        </span>
+        </span> */}
       </div>
     </div>
   );
