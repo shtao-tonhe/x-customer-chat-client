@@ -34,9 +34,7 @@ const styles = {
     position: 'absolute',
     cursor: 'pointer',
     right: '10px',
-    top: '2px',
-    width: '16px',
-    height: '17px',
+    top: '-5px',
     display: 'flex',
     alignItems: 'flex-end',
     justifyContent: 'center',
@@ -54,16 +52,12 @@ const styles = {
   },
   container: {
     width: '100%',
-    maxWidth: '1200px',
+    // maxWidth: '1200px',
     height: '100%',
     display: 'flex',
     alignItems: 'flex-end',
     justifyContent: 'center',
     position: 'relative',
-  },
-  left: {
-    flex: 1,
-    minWidth: '200px',
   },
   copyright: {
     margin: 0,
@@ -72,7 +66,6 @@ const styles = {
   },
   right: {
     flex:1,
-    minWidth: '200px',
     textAlign: 'right',
     display: 'flex',
     alignItems: 'center',

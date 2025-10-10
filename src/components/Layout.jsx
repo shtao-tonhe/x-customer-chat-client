@@ -9,8 +9,8 @@ const Layout = ({ children }) => {
       <Header />
       <main className='overflow-auto bg-white-100'>
         {children}
+        <Footer />
       </main>
-      <Footer />
     </div>
   );
 };

@@ -5,6 +5,9 @@ const TextMessage = ({ content, sender, timestamp }) => {
 
   return (
     <div className={`flex ${isMe ? 'justify-end' : 'justify-start'}`}>
+      <span className={`text-xs mt-1 ${isMe ? 'text-right text-gray-500' : 'text-left text-gray-500'}`}>
+        {timestamp}
+      </span>
       <div className={`max-w-[80%] ${isMe ? 'items-end' : 'items-start'} flex flex-col`}>
         <div className={`
           px-2 py-2 rounded-xl
@@ -12,9 +15,6 @@ const TextMessage = ({ content, sender, timestamp }) => {
         `}>
           <p className='text-sm text-left'>{content}</p>
         </div>
-        <span className={`text-xs mt-1 ${isMe ? 'text-right text-gray-500' : 'text-left text-gray-500'}`}>
-          {timestamp}
-        </span>
       </div>
     </div>
   );

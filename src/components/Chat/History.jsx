@@ -41,52 +41,52 @@ const ChatPage = () => {
       sender: 'other',
       timestamp: '09:32'
     },
-    {
-      id: 4,
-      type: 'confirm',
-      textContent: '请确认您的退款申请类型',
-      confirmText: '全额退款',
-      cancelText: '部分退款',
-      sender: 'other',
-      timestamp: '09:32'
-    },
-    {
-      id: 5,
-      type: 'attachment',
-      textContent: '这是产品的相关说明',
-      attachments: [
-        { type: 'image', url: 'https://picsum.photos/400/300', name: '产品图片.jpg' },
-        { type: 'file', url: '#', name: '产品说明书.pdf' }
-      ],
-      sender: 'other',
-      timestamp: '09:33'
-    },
-    {
-      id: 6,
-      type: 'text',
-      content: '请提供您的订单号以便我们处理',
-      sender: 'other',
-      timestamp: '09:34'
-    },
-    {
-      id: 7,
-      type: 'input',
-      textContent: '请输入您的订单号',
-      inputPlaceholder: '订单号',
-      buttonText: '提交',
-      sender: 'other',
-      timestamp: '09:34'
-    },
-    {
-      id: 8,
-      type: 'attachment',
-      textContent: '这是我的订单截图',
-      attachments: [
-        { type: 'image', url: 'https://picsum.photos/500/300', name: '订单截图.png' }
-      ],
-      sender: 'me',
-      timestamp: '09:35'
-    }
+    // {
+    //   id: 4,
+    //   type: 'confirm',
+    //   textContent: '请确认您的退款申请类型',
+    //   confirmText: '全额退款',
+    //   cancelText: '部分退款',
+    //   sender: 'other',
+    //   timestamp: '09:32'
+    // },
+    // {
+    //   id: 5,
+    //   type: 'attachment',
+    //   textContent: '这是产品的相关说明',
+    //   attachments: [
+    //     { type: 'image', url: 'https://picsum.photos/400/300', name: '产品图片.jpg' },
+    //     { type: 'file', url: '#', name: '产品说明书.pdf' }
+    //   ],
+    //   sender: 'other',
+    //   timestamp: '09:33'
+    // },
+    // {
+    //   id: 6,
+    //   type: 'text',
+    //   content: '请提供您的订单号以便我们处理',
+    //   sender: 'other',
+    //   timestamp: '09:34'
+    // },
+    // {
+    //   id: 7,
+    //   type: 'input',
+    //   textContent: '请输入您的订单号',
+    //   inputPlaceholder: '订单号',
+    //   buttonText: '提交',
+    //   sender: 'other',
+    //   timestamp: '09:34'
+    // },
+    // {
+    //   id: 8,
+    //   type: 'attachment',
+    //   textContent: '这是我的订单截图',
+    //   attachments: [
+    //     { type: 'image', url: 'https://picsum.photos/500/300', name: '订单截图.png' }
+    //   ],
+    //   sender: 'me',
+    //   timestamp: '09:35'
+    // }
   ]);
 
   const messagesEndRef = useRef(null);
@@ -106,7 +106,7 @@ const ChatPage = () => {
       sender: 'me',
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
-    
+
     setMessages(prev => [...prev, reply]);
   };
 
@@ -177,10 +177,10 @@ const ChatPage = () => {
   return (
     <div className="flex flex-col bg-gray-50">
       {/* 聊天内容区域 */}
-      <div className="flex flex-col flex-1 overflow-y-auto p-4">
+      <div className="flex flex-col flex-1 overflow-y-auto p-4 mt-2">
         <div className="flex justify-center py-2">
           <span className="bg-gray-200 text-gray-600 text-xs px-3 py-1 rounded-full">
-            今天
+            Today
           </span>
         </div>
 
