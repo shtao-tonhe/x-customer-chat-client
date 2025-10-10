@@ -147,7 +147,7 @@ const ServiceRating = ({
 
         {/* 表情评分区域 */}
         <div className="mb-6">
-          <p className="text-sm text-gray-500 mb-4">请选择您对本次服务的满意度</p>
+          <p className="text-xs text-gray-500 mb-4">请选择您对本次服务的满意度</p>
           <div className="flex justify-around">
             {ratingOptions.map(option => (
               <div
@@ -155,13 +155,13 @@ const ServiceRating = ({
                 className={`flex flex-col items-center cursor-pointer transition-all duration-200`}
                 onClick={() => handleRatingSelect(option.id)}
               >
-                <div className={`${selectedRating!=option.id ?'text-gray-500':option.color} text-2xl mb-1`}>
+                <div className={`${selectedRating!=option.id ?'text-gray-400':option.color} text-2xl mb-1`}>
                   {option.icon}
                 </div>
-                <span className={`text-sm ${
+                <span className={`text-xs ${
                   selectedRating === option.id
                     ? option.color
-                    : 'text-gray-600'
+                    : 'text-gray-500'
                 }`}>
                   {option.label}
                 </span>
@@ -173,12 +173,12 @@ const ServiceRating = ({
         {/* 快捷选项区域 */}
         {quickOptions.length > 0 && (
           <div className="mb-6">
-            <p className="text-sm text-gray-500 mb-3">您对本次服务的感受是？（可多选）</p>
+            <p className="text-xs text-gray-500 mb-3">您对本次服务的感受是？（可多选）</p>
             <div className="flex flex-wrap gap-2">
               {quickOptions.map(option => (
                 <div
                   key={option.id}
-                  className={`px-3 py-1 rounded-full text-sm cursor-pointer transition-all duration-200 ${
+                  className={`px-3 py-1 rounded-full text-xs cursor-pointer transition-all duration-200 ${
                     selectedOptions.includes(option.id)
                       ? 'bg-blue-50 text-blue-600 border border-blue-200'
                       : 'bg-gray-50 text-gray-700 border border-gray-200 hover:bg-gray-100'
@@ -195,13 +195,13 @@ const ServiceRating = ({
         {/* 文字补充区域 */}
         <div className="mb-2" >
           <div className="flex justify-between items-center mb-2">
-            <p className="text-sm text-gray-500">补充更多内容（选填）</p>
+            <p className="text-xs text-gray-500">补充更多内容（选填）</p>
             <span className="text-xs text-gray-400">
               {supplementText.length}/200
             </span>
           </div>
           <textarea
-            className="w-full min-h-[80px] p-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none text-sm resize-none"
+            className="w-full min-h-[80px] p-3 rounded-lg border border-gray-200 focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none text-xs resize-none"
             placeholder="请输入您的建议或其他反馈..."
             value={supplementText}
             onChange={handleTextChange}
@@ -218,7 +218,7 @@ const ServiceRating = ({
             取消
           </button> */}
           <button
-            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+            className={`px-4 py-2 rounded-lg text-xs font-medium transition-colors ${
               selectedRating
                 ? 'bg-blue-600 text-white hover:bg-blue-700'
                 : 'bg-gray-300 text-gray-500 cursor-not-allowed'

@@ -32,12 +32,12 @@ const ChatPage = () => {
         <ChatHistory></ChatHistory>
 
         {/* 结果评价 */}
-        <ServiceRating
+        {/* <ServiceRating
           isVisible={showRating}
           quickOptions={quickOptions}
           onSubmit={handleRatingSubmit}
           onCancel={() => setShowRating(false)}
-        />
+        /> */}
       </div>
 
       {/* 内容发送 */}

@@ -25,31 +25,82 @@ const ChatPage = () => {
       type: 'text',
       content: '您好！我是您的客服，有什么可以帮助您的吗？',
       sender: 'other',
-      timestamp: '09:30'
+      timestamp: '09:30',
+      isRead: true,
     },
     {
       id: 2,
       type: 'text',
-      content: '我想咨询一下关于产品退款的问题',
+      content: '充值退款',
       sender: 'me',
-      timestamp: '09:31'
+      timestamp: '09:30',
+      isRead: true,
+    },
+    // {
+    //   id: 22,
+    //   type: 'text',
+    //   content: '请选择操作的订单',
+    //   sender: 'other',
+    //   timestamp: '09:30',
+    //   isRead: true,
+    // },
+    {
+      id: 23,
+      type: 'select',
+      textContent: '请选择操作的订单',
+      sender: 'other',
+      timestamp: '09:30',
+      status: 'init',
+      options: {
+        isMultiple: false,
+        type: 'text',
+        values:[
+          { label: 'pay001', value: 'pay001' },
+          { label: 'pay002', value: 'pay002' }
+        ]
+      },
     },
     {
       id: 3,
       type: 'text',
       content: '请问您是想申请全额退款还是部分退款呢？',
       sender: 'other',
-      timestamp: '09:32'
+      timestamp: '09:32',
     },
-    // {
-    //   id: 4,
-    //   type: 'confirm',
-    //   textContent: '请确认您的退款申请类型',
-    //   confirmText: '全额退款',
-    //   cancelText: '部分退款',
-    //   sender: 'other',
-    //   timestamp: '09:32'
-    // },
+    {
+      id: 4,
+      type: 'text',
+      content: '全额',
+      sender: 'me',
+      timestamp: '09:31',
+      isRead: true,
+    },
+    {
+      id: 33,
+      type: 'confirm',
+      textContent: '是否继续执行退款？此操作会进行订单全额退款噢~',
+      confirmText: '继续',
+      cancelText: '取消',
+      sender: 'other',
+      timestamp: '09:32',
+      status: 'init',
+    },
+    {
+      id: 5,
+      type: 'text',
+      content: '晚安🌛😈',
+      sender: 'me',
+      timestamp: '19:31',
+      isRead: false,
+    },
+    {
+      id: 6,
+      type: 'text',
+      content: '可以饿吗？',
+      sender: 'me',
+      timestamp: '19:31',
+      isRead: false,
+    },
     // {
     //   id: 5,
     //   type: 'attachment',
@@ -96,19 +147,56 @@ const ChatPage = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+  // 处理选择消息的回调
+  const handleSelectConfirm = (messageId, confirmed) => {
+    const checkMsg = messages.find(m => m.id == messageId);
+    console.log(checkMsg);
+    // 先设置msg的status为loading
+    setMessages(prev => prev.map(m =>
+      m.id === messageId ? { ...m, status: 'loading' } : m
+    ));
+
+    // 模拟api请求，2s之后更新status为loaded
+    setTimeout(() => {
+      setMessages(prev => prev.map(m =>
+        m.id === messageId ? { ...m, status: 'loaded' } : m
+      ));
+      const reply = {
+        id: Date.now() + 2,
+        type: 'text',
+        content: `您已选择：${confirmed}`,
+        sender: 'me',
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+      setMessages(prev => [...prev, reply]);
+    }, 2000);
+  };
+
 
   // 处理确认消息的回调
   const handleConfirm = (messageId, confirmed) => {
-    const reply = {
-      id: Date.now() + 2,
-      type: 'text',
-      content: `您已选择：${confirmed ? '全额退款' : '部分退款'}`,
-      sender: 'me',
-      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
-    };
-
-    setMessages(prev => [...prev, reply]);
+    const checkMsg = messages.find(m => m.id == messageId);
+    console.log(checkMsg);
+    // 先设置msg的status为loading
+    setMessages(prev => prev.map(m =>
+      m.id === messageId ? { ...m, status: 'loading' } : m
+    ));
+    // 模拟api请求，2s之后更新status为loaded
+    setTimeout(() => {
+      setMessages(prev => prev.map(m =>
+        m.id === messageId ? { ...m, status: 'loaded' } : m
+      ));
+      const reply = {
+        id: Date.now() + 2,
+        type: 'text',
+        content: `您已选择：${confirmed ? checkMsg.confirmText : checkMsg.cancelText}`,
+        sender: 'me',
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+      };
+      setMessages(prev => [...prev, reply]);
+    }, 2000);
   };
+
 
   // 处理输入消息的提交
   const handleInputSubmit = (messageId, value) => {
@@ -119,7 +207,7 @@ const ChatPage = () => {
       sender: 'me',
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
-    
+
     setMessages(prev => [...prev, reply]);
   };
 
@@ -128,29 +216,40 @@ const ChatPage = () => {
     switch (msg.type) {
       case 'text':
         return (
-          <TextMessage 
-            key={msg.id} 
-            content={msg.content} 
+          <TextMessage
+            key={msg.id}
+            content={msg.content}
             sender={msg.sender}
             timestamp={msg.timestamp}
+            isRead={msg.isRead}
           />
         );
       case 'confirm':
         return (
-          <ConfirmMessage 
-            key={msg.id} 
+          <ConfirmMessage
+            key={msg.id}
             textContent={msg.textContent}
             confirmText={msg.confirmText}
             cancelText={msg.cancelText}
             sender={msg.sender}
-            timestamp={msg.timestamp}
             onConfirm={(confirmed) => handleConfirm(msg.id, confirmed)}
+            status={msg.status}
+          />
+        );
+      case 'select':
+        return (
+          <SelectMessage
+            key={msg.id}
+            textContent={msg.textContent}
+            options={msg.options}
+            onConfirm={(confirmed) => handleSelectConfirm(msg.id, confirmed)}
+            status={msg.status}
           />
         );
       case 'attachment':
         return (
-          <AuthCodeMessage 
-            key={msg.id} 
+          <AuthCodeMessage
+            key={msg.id}
             textContent={msg.textContent}
             attachments={msg.attachments}
             sender={msg.sender}
@@ -159,8 +258,8 @@ const ChatPage = () => {
         );
       case 'input':
         return (
-          <InputMessage 
-            key={msg.id} 
+          <InputMessage
+            key={msg.id}
             textContent={msg.textContent}
             inputPlaceholder={msg.inputPlaceholder}
             buttonText={msg.buttonText}
@@ -179,7 +278,8 @@ const ChatPage = () => {
       {/* 聊天内容区域 */}
       <div className="flex flex-col flex-1 overflow-y-auto p-4 mt-2">
         <div className="flex justify-center py-2">
-          <span className="bg-gray-200 text-gray-600 text-xs px-3 py-1 rounded-full">
+          <span className="bg-gray-500 text-white text-xs px-3 py-1 rounded-xl">
+          {/* https://huggingface.co/ */}
             Today
           </span>
         </div>

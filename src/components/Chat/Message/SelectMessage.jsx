@@ -1,64 +1,131 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { AiOutlineLoading3Quarters, AiOutlineCheck } from 'react-icons/ai';
 
 const SelectMessage = ({
   textContent,
   options,
-  sender,
-  timestamp,
-  onSelect
+  onConfirm,
+  status
 }) => {
-  const isMe = sender === 'me';
-  const [selectedOption, setSelectedOption] = useState('');
+  const [selectedOption, setSelectedOption] = useState([]);
+  const { isMultiple, type, values } = options;
 
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setSelectedOption(value);
-    if (onSelect) {
-      onSelect(value);
+  // 处理选项选择
+  const handleOptionSelect = (value) => {
+    if (isMultiple) {
+      // 多选逻辑：切换选中状态
+      setSelectedOption(prev =>
+        prev.includes(value)
+          ? prev.filter(item => item !== value)
+          : [...prev, value]
+      );
+    } else {
+      // 单选逻辑：直接替换
+      setSelectedOption([value]);
+    }
+  };
+
+  // 检查选项是否被选中
+  const isSelected = (value) => {
+    return selectedOption.includes(value);
+  };
+
+  // 渲染选择选项内容
+  const SelectOptionContnet = () => {
+    const msgType = type;
+    const list = values || [];
+
+    if (msgType === 'text') {
+      // 纯文本标签展示
+      return (
+        <div className="flex flex-col mt-2">
+          {list.map((item) => (
+            <div
+              key={item.value}
+              onClick={() => handleOptionSelect(item.value)}
+              className={`text-[11px] px-2 py-1  mb-1 rounded-md text-sm cursor-pointer transition-all duration-200 border ${
+                isSelected(item.value)
+                  ? 'bg-blue-600 text-white border-blue-700'
+                  : 'bg-white text-gray-800 border-gray-200 hover:bg-gray-50'
+              }`}
+            >
+              <span className='flex items-start'>{item.label}</span>
+              {isSelected(item.value) && (
+                <AiOutlineCheck className="inline-block ml-1.5 text-xs" />
+              )}
+            </div>
+          ))}
+        </div>
+      );
+    } else {
+      // 左图右文案展示 - 订单/商品详情样式
+      return (
+        <div className="space-y-2 mt-2">
+          {list.map((item) => (
+            <div
+              key={item.value}
+              onClick={() => handleOptionSelect(item.value)}
+              className={`flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200 border ${
+                isSelected(item.value)
+                  ? 'bg-blue-50 text-gray-800 border-blue-200'
+                  : 'bg-white text-gray-800 border-gray-200 hover:bg-gray-50'
+              }`}
+            >
+              {/* 左侧图片 */}
+              <div className="w-14 h-14 bg-gray-100 rounded overflow-hidden flex-shrink-0">
+                <img 
+                  src={`https://picsum.photos/seed/${item.value}/100/100`} 
+                  alt={`${item.label}的缩略图`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* 中间内容 */}
+              <div className="ml-3 flex-grow">
+                <div className="font-medium">{item.label}</div>
+                <div className="text-xs text-gray-500 mt-0.5">
+                  订单编号: {item.value}
+                </div>
+              </div>
+
+              {/* 右侧选中标识 */}
+              {isSelected(item.value) && (
+                <div className="w-5 h-5 rounded-full bg-blue-600 text-white flex items-center justify-center">
+                  <AiOutlineCheck className="text-xs" />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      );
     }
   };
 
   return (
-    <div className={`flex ${isMe ? 'justify-end' : 'justify-start'} mb-4`}>
-      <div className={`max-w-[80%] ${isMe ? 'items-end' : 'items-start'} flex flex-col`}>
-        {/* 文本说明部分 */}
+    <div className={`flex justify-start mb-4`}>
+      <div className={`w-[70%] items-start flex flex-col`}>
         <div className={`
-          px-4 py-2 rounded-2xl mb-2
-          ${isMe ? 'bg-blue-600 text-white rounded-tr-none' : 'bg-white text-gray-800 rounded-tl-none shadow-sm border border-gray-100'}
+          px-2 py-2 rounded-xl text-gray-700 mb-2 w-full
+          rounded-tl-none bg-gray-200 border border-gray-300/10
         `}>
-          <p>{textContent}</p>
-        </div>
+          <p className='text-xs text-left text-gray-700'>{textContent}</p>
 
-        {/* 选择框部分 */}
-        <div className={`
-          px-4 py-3 rounded-2xl
-          ${isMe ? 'bg-blue-600 text-white rounded-tr-none' : 'bg-white text-gray-800 rounded-tl-none shadow-sm border border-gray-100'}
-        `}>
-          <select
-            value={selectedOption}
-            onChange={handleChange}
-            className={`w-full px-3 py-2 rounded-lg text-sm border ${
-              isMe
-                ? 'bg-blue-700 border-blue-500 text-white'
-                : 'bg-gray-50 border-gray-200 text-gray-800'
-            } focus:outline-none focus:ring-1 focus:ring-blue-500 appearance-none bg-no-repeat bg-right`}
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' strokeWidth='2' strokeLinecap='round' strokeLinejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`,
-              backgroundPosition: 'calc(100% - 10px) center'
-            }}
-          >
-            <option value="" disabled>请选择...</option>
-            {options.map(option => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        </div>
+          <SelectOptionContnet />
 
-        <span className={`text-xs mt-1 ${isMe ? 'text-right text-gray-500' : 'text-left text-gray-500'}`}>
-          {timestamp}
-        </span>
+          {status !== 'loaded' && (
+            <div className={`flex justify-end mt-2`}>
+              <button
+                disabled={status === 'loading' || selectedOption.length === 0}
+                onClick={() => onConfirm(selectedOption)}
+                className={`flex flex-row items-center text-[11px] px-2 py-1 rounded-sm bg-blue-600 hover:bg-blue-700 text-white
+                ${(status === 'loading' || selectedOption.length === 0) ? 'cursor-not-allowed opacity-70' : 'cursor-pointer'}`}
+              >
+                { status === 'loading' ? <AiOutlineLoading3Quarters className="animate-spin mr-1" /> : '' }
+                确定
+              </button>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
