@@ -1,0 +1,24 @@
+.inset-box {
+  /* For WebKit browsers (Chrome, Safari, newer Edge) */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* For Internet Explorer, Edge and Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.text-ellipsis-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.text-ellipsis-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

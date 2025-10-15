@@ -14,58 +14,65 @@ import ConfirmMessage from './Message/ConfirmMessage';
 import InputMessage from './Message/InputMessage';
 import AuthCodeMessage from './Message/AuthCodeMessage';
 import SelectMessage from './Message/SelectMessage';
+import UrlMessage from './Message/UrlMessage';
 
 const ChatPage = () => {
   const navigate = useNavigate();
   const [message, setMessage] = useState('');
   const [messages, setMessages] = useState([
-    // 示例消息数据
     {
-      id: 1,
+      id: 222,
       type: 'text',
-      content: '您好！我是您的客服，有什么可以帮助您的吗？',
-      sender: 'other',
-      timestamp: '09:30',
-      isRead: true,
-    },
-    {
-      id: 2,
-      type: 'text',
-      content: '充值退款',
+      content: 'Hello! I would like to schedule a demo',
       sender: 'me',
       timestamp: '09:30',
       isRead: true,
     },
-    // {
-    //   id: 22,
-    //   type: 'text',
-    //   content: '请选择操作的订单',
-    //   sender: 'other',
-    //   timestamp: '09:30',
-    //   isRead: true,
-    // },
+    {
+      id: 1,
+      type: 'text',
+      content: "Hey 👋🏼, It's Crispy, the chatbot here at Crisp. Want to know more about me? I'm a very powerful chatbot, feel free to start the conversation 💥",
+      sender: 'other',
+      timestamp: '09:30',
+      isRead: true,
+    },
+    {
+      id: 223,
+      type: 'text',
+      content: 'Hello! I would like to schedule a demo',
+      sender: 'me',
+      timestamp: '09:30',
+      isRead: true,
+    },
     {
       id: 23,
       type: 'select',
-      textContent: '请选择操作的订单',
+      textContent: '你想要查看哪个版本？你想要查看哪个版本？你想要查看哪个版本？',
       sender: 'other',
       timestamp: '09:30',
-      status: 'init',
+      status: 'loaded',
       options: {
         isMultiple: false,
         type: 'text',
         values:[
-          { label: 'pay001', value: 'pay001' },
-          { label: 'pay002', value: 'pay002' }
+          { label: 'Basic Version', value: 'plan1' },
+          { label: 'Enterprise Version', value: 'plan2' },
+          { label: 'Customized Version', value: 'plan3' },
         ]
       },
     },
     {
-      id: 3,
-      type: 'text',
-      content: '请问您是想申请全额退款还是部分退款呢？',
+      id: 55,
+      type: 'url',
+      content: '版本介绍/帮助文档',
       sender: 'other',
-      timestamp: '09:32',
+      timestamp: '19:31',
+      isRead: false,
+      urlInfo: {
+        url: 'https://ai.zhanluifo.com',
+        title: 'ZhanluInfo - 智能助手',
+        description: 'AI智能助手AI智能助手AI智能助手AI智能助手AI智能助手AI智能助手AI智能助手AI智能助手'
+      }
     },
     {
       id: 4,
@@ -76,10 +83,17 @@ const ChatPage = () => {
       isRead: true,
     },
     {
+      id: 3,
+      type: 'text',
+      content: '请问您是想申请全额退款还是部分退款呢？',
+      sender: 'other',
+      timestamp: '09:32',
+    },
+    {
       id: 33,
       type: 'confirm',
       textContent: '是否继续执行退款？此操作会进行订单全额退款噢~',
-      confirmText: '继续',
+      confirmText: '已知晓平台规则，继续执行退款',
       cancelText: '取消',
       sender: 'other',
       timestamp: '09:32',
@@ -88,7 +102,7 @@ const ChatPage = () => {
     {
       id: 5,
       type: 'text',
-      content: '晚安🌛😈',
+      content: '晚安🌹🌹🌹',
       sender: 'me',
       timestamp: '19:31',
       isRead: false,
@@ -96,7 +110,7 @@ const ChatPage = () => {
     {
       id: 6,
       type: 'text',
-      content: '可以饿吗？',
+      content: "Hey 👋🏼, It's Crispy, the chatbot here at Crisp. Want to know more about me? I'm a very powerful chatbot, feel free to start the conversation 💥",
       sender: 'me',
       timestamp: '19:31',
       isRead: false,
@@ -246,6 +260,15 @@ const ChatPage = () => {
             status={msg.status}
           />
         );
+      case 'url':
+        return (
+          <UrlMessage
+            key={msg.id}
+            content={msg.content}
+            isRead={msg.isRead}
+            urlInfo={msg.urlInfo}
+          />
+        );
       case 'attachment':
         return (
           <AuthCodeMessage
@@ -278,9 +301,10 @@ const ChatPage = () => {
       {/* 聊天内容区域 */}
       <div className="flex flex-col flex-1 overflow-y-auto p-4 mt-2">
         <div className="flex justify-center py-2">
-          <span className="bg-gray-500 text-white text-xs px-3 py-1 rounded-xl">
+          <span className="text-gray-600 font-semibold text-xs px-3 py-1 rounded-xl">
           {/* https://huggingface.co/ */}
-            Today
+            {/* Today · 星期三 · 10/15/10:11 */}
+            星期三 · 10/15 08:11
           </span>
         </div>
 
